@@ -56,7 +56,14 @@
     <Folder Include="OWShop\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\favicon.ico" />
+    <Content Include="app\static\app\content\favicon1.png" />
+    <Content Include="app\static\app\content\favicon2.png" />
+    <Content Include="app\static\app\content\favicon3.png" />
     <Content Include="app\static\app\content\logo.png" />
+    <Content Include="app\static\app\content\oldsite.css" />
+    <Content Include="app\templates\app\links.html" />
+    <Content Include="app\templates\app\oldabout.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

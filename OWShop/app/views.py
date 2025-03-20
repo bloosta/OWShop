@@ -26,7 +26,7 @@ def contact(request):
         'app/contact.html',
         {
             'title':'Контакты',
-            'message':'Наша страница контактов.',
+            'message':'Наша страница контактов',
             'year':datetime.now().year,
         }
     )
@@ -39,7 +39,20 @@ def about(request):
         'app/about.html',
         {
             'title':'О нас',
-            'message':'Наша страница о нас.',
+            'message':'Наша страница о нас',
             'year':datetime.now().year,
         }
     )
+
+
+def links (request):
+    assert isinstance(request, HttpRequest)
+    return render(
+    request,
+    'app/links.html',
+    {
+        'title':'Ссылки',
+        'message':'Полезные ссылки',
+        'year':datetime.now().year,
+    }
+)

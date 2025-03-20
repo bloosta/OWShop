@@ -7,6 +7,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link rel="icon" href="{% static 'app/content/favicon.ico' %}" type="image/x-icon">
     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
 </head>
 
@@ -18,6 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 <a href="/" class="navbar-brand"> <img class="logo" src="{% static 'app/content/logo.png' %}" alt="logo" /> </a>
             </div>
@@ -26,6 +28,7 @@
                     <li><a href="{% url 'home' %}">Главная</a></li>
                     <li><a href="{% url 'about' %}">О нас</a></li>
                     <li><a href="{% url 'contact' %}">Контакты</a></li>
+                    <li><a href="{% url 'links' %}">Ссылки</a></li>
                 </ul>
                 {% include 'app/loginpartial.html' %}
             </div>
