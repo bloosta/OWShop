@@ -62,7 +62,6 @@
     <Content Include="app\static\app\content\favicon3.png" />
     <Content Include="app\static\app\content\logo.png" />
     <Content Include="app\static\app\content\oldsite.css" />
-    <Content Include="app\static\app\content\pool.css" />
     <Content Include="app\static\app\scripts\pool.js" />
     <Content Include="app\templates\app\links.html" />
     <Content Include="app\templates\app\oldabout.html" />
