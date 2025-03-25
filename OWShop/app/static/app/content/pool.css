@@ -1,0 +1,85 @@
+/*  Базовые стили, заимствованные из основного CSS */
+body {
+    font-family: 'Courier', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #222; /* Темнее, как в заголовках */
+}
+
+section {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Специфические стили для feedback.html */
+.feedback-section {
+    max-width: 600px; /* Уменьшаем ширину для лучшей адаптации */
+    margin: 40px auto; /* Добавляем отступ сверху и по центру */
+    padding: 30px;
+    border: 1px solid #ddd; /* Светлее, чем основная граница */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Более заметная тень */
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold; /* Выделяем label жирным шрифтом */
+}
+
+.feedback-form input,
+.feedback-form textarea,
+.feedback-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit; /* Наследуем шрифт от body */
+}
+
+.feedback-form textarea {
+    height: 150px;
+    resize: vertical; /*  Разрешаем изменение высоты, но не ширины */
+}
+
+.submit-button {
+    background-color: #222; /*  Тёмно-серый, как в шапке */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Плавный переход цвета */
+}
+
+    .submit-button:hover {
+        background-color: #333; /*  Еще темнее при наведении */
+    }
+
+.success-message {
+    color: #007bff; /*  Синий, как ссылки */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}

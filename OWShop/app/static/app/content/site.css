@@ -65,12 +65,84 @@ input[type="checkbox"].input-validation-error {
     background-color: #333
 }
 
-.btn {
+.btn, .btn:hover {
     background-color: #f99e1a;
     color: #ffffff;
     border: none;
 }
 
+
 .orange {
     color: #f99e1a;
 }
+
+.link-section a{
+    text-decoration: none;
+/*    font-size: 24px;*/
+}
+
+/*.link-section {
+    font-size: 24px;
+}*/
+
+
+
+ .feedback-section {
+   max-width: 600px; /* Уменьшаем ширину для лучшей адаптации */
+   margin: 40px auto; /* Добавляем отступ сверху и по центру */
+   padding: 30px;
+   border: 1px solid #ddd; /* Светлее, чем основная граница */
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Более заметная тень */
+   align-items: center;
+ }
+ 
+ .feedback-form {
+   align-items: center;
+ }
+ 
+ .feedback-form label {
+   display: block;
+   margin-bottom: 8px;
+   font-weight: bold; /* Выделяем label жирным шрифтом */
+ }
+ 
+ .feedback-form input,
+ .feedback-form textarea,
+ .feedback-form select {
+   width: 100%;
+   padding: 12px;
+   margin-bottom: 15px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+   font-family: inherit; /* Наследуем шрифт от body */
+ }
+ 
+ .feedback-form textarea {
+   height: 150px;
+   resize: vertical; /*  Разрешаем изменение высоты, но не ширины */
+ 
+ }
+ 
+ .submit-button {
+   background-color: #222; /*  Тёмно-серый, как в шапке */
+   color: white;
+   padding: 12px 20px;
+   border: none;
+   cursor: pointer;
+   border-radius: 4px;
+   transition: background-color 0.3s ease; /* Плавный переход цвета */
+ }
+ 
+ .submit-button:hover {
+   background-color: #333; /*  Еще темнее при наведении */
+ }
+ 
+ .success-message {
+   color: #007bff; /*  Синий, как ссылки */
+   font-weight: bold;
+   margin-bottom: 20px;
+   text-align: center;
+ }
+ 
