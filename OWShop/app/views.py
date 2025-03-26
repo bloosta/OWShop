@@ -66,9 +66,9 @@ def pool(request):
             submitted = True
             field_names = {
                 'rating_overall': 'Общая оценка сайта',
-                'rating_design': 'Оценка дизайна',
-                'rating_content': 'Оценка контента',
-                'features_liked': 'Что понравилось',
+                'rating_design': 'Оценка услуг',
+                'rating_content': 'Оценка техподдержки',
+                'features_liked': 'Приобретенный товар',
                 'features_improve': 'Что можно улучшить',
                 'newsletter': 'Подписка на рассылку',
                 'contact_method': 'Способ связи',

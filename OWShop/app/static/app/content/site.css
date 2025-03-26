@@ -88,12 +88,12 @@ input[type="checkbox"].input-validation-error {
 
 
  .feedback-section {
-   max-width: 700px; /* Уменьшаем ширину для лучшей адаптации */
-   margin: 40px auto; /* Добавляем отступ сверху и по центру */
+   max-width: 700px; 
+   margin: 40px auto;
    padding: 30px;
-   border: 1px solid #ddd; /* Светлее, чем основная граница */
+   border: 1px solid #ddd; 
    border-radius: 8px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Более заметная тень */
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
    align-items: center;
  }
  
@@ -104,7 +104,7 @@ input[type="checkbox"].input-validation-error {
  .feedback-form label {
    display: block;
    margin-bottom: 8px;
-   font-weight: bold; /* Выделяем label жирным шрифтом */
+   font-weight: bold;
  }
  
  .feedback-form input,
@@ -116,23 +116,23 @@ input[type="checkbox"].input-validation-error {
    border: 1px solid #ccc;
    border-radius: 4px;
    box-sizing: border-box;
-   font-family: inherit; /* Наследуем шрифт от body */
+   font-family: inherit; 
  }
  
  .feedback-form textarea {
    height: 150px;
-   resize: vertical; /*  Разрешаем изменение высоты, но не ширины */
+   resize: vertical; 
  
  }
 
 .submit-button {
-    background-color: #f99e1a; /*  Тёмно-серый, как в шапке */
+    background-color: #f99e1a; 
     color: white;
     padding: 12px 20px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease; /* Плавный переход цвета */
+    transition: background-color 0.3s ease; 
 }
  
  .submit-button:hover {
