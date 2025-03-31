@@ -21,10 +21,10 @@ inputs.forEach(input => {
     });
 
     input.addEventListener('mouseover', () => {
-        input.style.backgroundColor = '#e0e0e0'; 
+        input.style.backgroundColor = '#e0e0e0';
     });
 
     input.addEventListener('mouseout', () => {
-        input.style.backgroundColor = 'white'; 
+        input.style.backgroundColor = 'white';
     });
 });

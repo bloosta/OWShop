@@ -30,6 +30,9 @@
                     <li><a href="{% url 'contact' %}">Контакты</a></li>
                     <li><a href="{% url 'links' %}">Ссылки</a></li>
                     <li><a href="{% url 'pool' %}">Обратная связь</a></li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'registration' %}">Регистрация</a></li>
+                    {% endif %}
                 </ul>
                 {% include 'app/loginpartial.html' %}
             </div>
