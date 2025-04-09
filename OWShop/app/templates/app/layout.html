@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
     <link rel="icon" href="{% static 'app/content/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
 </head>
 
@@ -30,6 +32,7 @@
                     <li><a href="{% url 'contact' %}">Контакты</a></li>
                     <li><a href="{% url 'links' %}">Ссылки</a></li>
                     <li><a href="{% url 'pool' %}">Обратная связь</a></li>
+                    <li><a href="{% url 'blog_list' %}">Блог</a></li>
                     {% if not user.is_authenticated %}
                         <li><a href="{% url 'registration' %}">Регистрация</a></li>
                     {% endif %}

@@ -62,7 +62,11 @@
     <Content Include="app\static\app\content\favicon3.png" />
     <Content Include="app\static\app\content\logo.png" />
     <Content Include="app\static\app\content\oldsite.css" />
+    <Content Include="app\static\app\content\slider.webp" />
+    <Content Include="app\static\app\content\slider1.avif" />
     <Content Include="app\static\app\scripts\pool.js" />
+    <Content Include="app\templates\app\blog_detail.html" />
+    <Content Include="app\templates\app\blog_list.html" />
     <Content Include="app\templates\app\links.html" />
     <Content Include="app\templates\app\oldabout.html" />
     <Content Include="app\templates\app\pool.html" />

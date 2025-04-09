@@ -1,0 +1,16 @@
+{% extends 'app/layout.html' %}
+ {% block title %}Блог{% endblock %}
+ 
+ {% load static %}
+ 
+ {% block content %}
+     <h1>Статьи блога</h1>
+     {% for post in posts %}
+         <section>
+             <h2><a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a></h2>
+             <p>{{ post.description|truncatewords:30 }}</p>  <!-- Краткое описание -->
+             <p class="date">{{ post.posted }}</p>
+             <a href="{% url 'blog_detail' post.id %}" class="read-more">Читать далее</a>
+         </section>
+     {% endfor %}
+ {% endblock %}

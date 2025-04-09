@@ -1,4 +1,5 @@
 {% extends "app/layout.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -25,4 +26,27 @@
     </div>
 </div>
 
+    <div class="glide">
+         <div class="glide__track" data-glide-el="track">
+             <ul class="glide__slides">
+                 <li class="glide__slide"><img src="{% static 'app/content/slider1.webp' %}" alt="Image 1"></li>
+                 <li class="glide__slide"><img src="{% static 'app/content/slider1.avif' %}" alt="Image 2"></li>
+                 <li class="glide__slide"><img src="{% static 'app/content/slider1.webp' %}" alt="Image 3"></li>
+             </ul>
+         </div>
+         <div data-glide-el="controls">
+             <button data-glide-dir="<">Prev</button>
+             <button data-glide-dir=">">Next</button>
+         </div>
+     </div>
+     <script>
+         new Glide('.glide', {
+             type: 'carousel',
+             autoplay: 3000,
+             hoverpause: true,
+             perView: 1,
+         }).mount();
+     </script>
+     
+     
 {% endblock %}

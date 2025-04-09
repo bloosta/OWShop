@@ -31,3 +31,18 @@ class Blog(models.Model):
         verbose_name_plural = "статьи блога"
 
 admin.site.register(Blog)
+
+class Comment(models.Model):
+     text = models.TextField(verbose_name="Текст комментария")
+     date = models.DateTimeField(default=datetime.now, db_index=True, verbose_name="Дата комментария")
+     author = models.ForeignKey(User, null=True, blank=True, verbose_name=("Автор комментария"), on_delete=models.CASCADE)
+     post = models.ForeignKey(Blog, verbose_name=("Статья комментария"), on_delete=models.CASCADE)
+ 
+     def __str__(self):
+         return f'Комментарий {self.id} {self.author} к {self.post}'
+     
+     class Meta:
+         db_table = "Comment"
+         ordering = ["-date"]
+         verbose_name = "Комментарий"
+         verbose_name_plural = "Комментарии"

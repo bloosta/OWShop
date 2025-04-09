@@ -16,6 +16,8 @@ urlpatterns = [
     path('links/', views.links, name='links'),
     path('pool/', views.pool, name='pool'),
     path('registration/', views.registration, name='registration'),
+    path('blog/', views.blog_list, name='blog_list'),
+    path('blog/<int:pk>/', views.blog_detail, name='blog_detail'),
     path('login/',
          LoginView.as_view
          (

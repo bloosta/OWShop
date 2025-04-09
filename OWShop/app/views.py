@@ -3,10 +3,13 @@ Definition of views.
 """
 
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from .forms import PoolForm
 from django.contrib.auth.forms import UserCreationForm
+from django.db import models
+from .models import Blog, Comment
+from .forms import CommentForm
 
 
 def home(request):
@@ -113,3 +116,34 @@ def registration(request):
         }
     )
 
+
+def blog_list(request):
+    posts = Blog.objects.all()
+    return render(request, 'app/blog_list.html', {'posts': posts})
+
+def blog_detail(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+    comments = Comment.objects.filter(post=pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_f = form.save(commit=False)
+            comment_f.author = request.user
+            comment_f.date = datetime.now()
+            comment_f.post = post
+            comment_f.save()
+
+            return redirect('blog_detail', pk=post.id)
+    else:
+        form = CommentForm()
+    return render(
+        request,
+        'app/blog_detail.html',
+        {
+            'post': post,
+            'comments': comments,
+            'form': form,
+            'year': datetime.now().year
+        }
+    )

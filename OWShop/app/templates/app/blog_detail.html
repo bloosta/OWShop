@@ -1,0 +1,37 @@
+{% extends 'app/layout.html' %}
+ {% block title %}{{ post.title }}{% endblock %}
+ 
+ {% load static %}
+ 
+  
+ {% block content %}
+     <section>
+         <h1>{{ post.title }}</h1>
+         <p class="date">{{ post.posted }}</p>
+         <div class="content"><p>{{ post.content|linebreaksbr }}</p>  </div>
+         <a href="{% url 'blog_list' %}" class="back-link">Назад к списку</a>
+     </section>
+
+     {% if user.is_authenticated %}
+         <section class="feedback-section">
+             <form method="post" class="feedback-form">
+                 <h3>Добавить комментарий</h3>
+                 {% csrf_token %}
+                 <div>
+                     {{ form.as_p }}
+                     <button type="submit" class="submit-button">Отправить комментарий</button>
+                 </div>
+             </form>
+         </section>
+     {% else %}
+         <h3>Для добавления комментария необходимо авторизоваться.</h3>
+     {% endif %}
+     {% for comment in comments %}
+     
+         <section class="feedback-section">
+             <h7>{{ comment.date }}</h7>
+             <h4>{{ comment.author }}</h4>
+             <p>{{ comment.text|linebreaksbr }}</p>
+         </section>
+     {% endfor %}
+ {% endblock %}
