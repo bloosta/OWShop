@@ -64,6 +64,9 @@
     <Content Include="app\static\app\content\oldsite.css" />
     <Content Include="app\static\app\content\slider.webp" />
     <Content Include="app\static\app\content\slider1.avif" />
+    <Content Include="app\static\app\content\slider1.jpg" />
+    <Content Include="app\static\app\content\slider2.avif" />
+    <Content Include="app\static\app\content\slider3.jpg" />
     <Content Include="app\static\app\scripts\pool.js" />
     <Content Include="app\templates\app\blog_detail.html" />
     <Content Include="app\templates\app\blog_list.html" />
