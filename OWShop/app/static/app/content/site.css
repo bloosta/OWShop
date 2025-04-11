@@ -195,3 +195,29 @@ section {
         font-weight: bold; 
 
     }
+div[data-glide-el="controls"] {
+    display: flex;
+    justify-content: center;
+    gap: 1010px;
+    margin-top: 10px;
+}
+
+    div[data-glide-el="controls"] button {
+        padding: 5px 15px;
+        background-color: #f99e1a;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        div[data-glide-el="controls"] button:hover {
+            background-color: #ff7f32;
+        }
+
+h4 {
+    color: #f99e1a;
+}
+h7{
+    font-style: italic;
+}

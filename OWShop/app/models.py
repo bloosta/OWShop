@@ -46,3 +46,6 @@ class Comment(models.Model):
          ordering = ["-date"]
          verbose_name = "Комментарий"
          verbose_name_plural = "Комментарии"
+
+
+admin.site.register(Comment)

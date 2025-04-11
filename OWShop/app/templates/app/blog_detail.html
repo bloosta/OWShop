@@ -24,8 +24,9 @@
              </form>
          </section>
      {% else %}
-         <h3>Для добавления комментария необходимо авторизоваться.</h3>
+         <h3>Для добавления комментария необходимо <a href="{% url 'login' %}">авторизоваться</a>.</h3>
      {% endif %}
+
      {% for comment in comments %}
      
          <section class="feedback-section">
