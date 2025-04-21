@@ -63,7 +63,6 @@
     <Content Include="app\static\app\content\favicon2.png" />
     <Content Include="app\static\app\content\favicon3.png" />
     <Content Include="app\static\app\content\logo.png" />
-    <Content Include="app\static\app\content\oldsite.css" />
     <Content Include="app\static\app\content\slider.webp" />
     <Content Include="app\static\app\content\slider1.avif" />
     <Content Include="app\static\app\content\slider1.jpg" />
