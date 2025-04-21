@@ -25,7 +25,11 @@ SECRET_KEY = '521ca9be-892e-47f1-abe3-e69403b201d8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'owshop.pythonanywhere.com',
+    '127.0.0.1',
+    'localhost',
+]
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS

@@ -57,6 +57,7 @@
     <Folder Include="OWShop\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\temp.jpg" />
     <Content Include="app\static\app\media\default.png" />
     <Content Include="app\static\app\content\favicon.ico" />
     <Content Include="app\static\app\content\favicon1.png" />
@@ -68,6 +69,7 @@
     <Content Include="app\static\app\content\slider1.jpg" />
     <Content Include="app\static\app\content\slider2.avif" />
     <Content Include="app\static\app\content\slider3.jpg" />
+    <Content Include="app\static\app\media\temp.jpg" />
     <Content Include="app\static\app\media\video1.mp4" />
     <Content Include="app\static\app\media\video2.mp4" />
     <Content Include="app\static\app\scripts\pool.js" />
