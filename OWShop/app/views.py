@@ -9,7 +9,7 @@ from .forms import PoolForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 from .models import Blog, Comment
-from .forms import CommentForm
+from .forms import CommentForm, BlogForm
 
 
 def home(request):
@@ -147,3 +147,36 @@ def blog_detail(request, pk):
             'year': datetime.now().year
         }
     )
+
+def newpost(request):
+    """Renders the newpost page."""
+    assert isinstance(request, HttpRequest)
+
+    if request.method == "POST":                                         # после отправки формы
+        blogform = BlogForm(request.POST, request.FILES)
+        if blogform.is_valid():
+            blog_f = blogform.save(commit=False)
+            blog_f.posted = datetime.now()
+            blog_f.autor = request.user
+            blog_f.save()                              # сохраняем изменения после добавления полей
+            return redirect('blog_list')                        # переадресация на страницу Блог после создания статьи Блога
+
+
+    else:
+        blogform = BlogForm()                                     # создание объекта формы для ввода данных
+
+    return render(
+        request,
+        'app/newpost.html',
+        {
+            'blogform': blogform,    # передача формы в шаблон веб-страницы
+            'title': 'Добавить статью блога',
+            'year':datetime.now().year,
+        }
+    )
+
+def videopost(request):
+    return render(request, "app/videopost.html")
+
+
+

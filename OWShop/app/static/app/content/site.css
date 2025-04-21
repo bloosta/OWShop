@@ -221,3 +221,7 @@ h4 {
 h7{
     font-style: italic;
 }
+
+VIDEO {
+    justify-content: center;
+}

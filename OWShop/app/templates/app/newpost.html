@@ -1,0 +1,18 @@
+{% extends 'app/layout.html' %}
+
+{% block title %}Создать статью{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <section class="feedback-section">
+        <h3>Добавить статью</h3>
+        <form method="POST" enctype="multipart/form-data", class="feedback-form">
+            {% csrf_token %}
+            <div>
+                {{ blogform.as_p }}
+                <button type="submit" class="submit-button">Сохранить статью</button> 
+            </div>
+        </form>
+    </section>        
+{% endblock %}

@@ -5,7 +5,7 @@ Definition of forms.
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import Comment
+from .models import Comment, Blog
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -35,3 +35,11 @@ class PoolForm(forms.Form):
     features_improve = forms.CharField(label='Что можно улучшить?', widget=forms.Textarea)
     newsletter = forms.BooleanField(label='Подписаться на рассылку новостей?', required=False)
     contact_method = forms.ChoiceField(label='Как с вами связаться?', choices=[('email', 'Email'), ('phone', 'Телефон')])
+
+
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('title', 'description', 'content', 'image', )
+        labels = {'title': "Заголовок", 'description': "Краткое содержание", 'content': "Полное содержание", 'image': "Изображение"}

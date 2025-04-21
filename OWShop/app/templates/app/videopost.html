@@ -1,0 +1,16 @@
+{% extends 'app/layout.html' %}
+
+{% block title %}Видео{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <section class="feedback-section">
+        <h2>Трейлер режима "Стадион"</h2>
+        <VIDEO src="/static/app/media/video1.mp4" controls="controls" width="600" height="450" poster="/static/app/media/default.png"></VIDEO>
+    </section>
+    <section class="feedback-section">
+        <h2>Трейлер режима "Classic"</h2>
+        <VIDEO src="/static/app/media/video2.mp4" controls="controls" width="600" height="450" poster="/static/app/media/default.png"></VIDEO>
+    </section>    
+{% endblock %}
