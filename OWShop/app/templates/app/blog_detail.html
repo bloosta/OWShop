@@ -5,12 +5,13 @@
  
   
  {% block content %}
-    {% if post.image and post.image.url != '/media/temp.jpg' %}
-        <img src="{{ post.image.url }}" alt="Изображение статьи блога" width="200" />
-    {% endif %}
+
      <section>
          <h1>{{ post.title }}</h1>
          <p class="date">{{ post.posted }}</p>
+         {% if post.image and post.image.url != '/media/temp.jpg' %}
+             <img class="blogimg" src="{{ post.image.url }}" alt="Изображение статьи блога" />
+         {% endif %}
          <div class="content"><p>{{ post.content|linebreaksbr }}</p>  </div>
          <a href="{% url 'blog_list' %}" class="back-link">Назад к списку</a>
      </section>

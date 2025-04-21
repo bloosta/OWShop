@@ -222,6 +222,21 @@ h7{
     font-style: italic;
 }
 
-VIDEO{
-    justify-content: center;
+video, VIDEO {
+    display: block;
+    margin: 20px auto; /* по центру и отступы сверху/снизу */
+    max-width: 100%; /* адаптивная ширина */
+    height: auto; /* сохраняем пропорции */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.blogimg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto; /* вертикальные отступы и выравнивание по центру */
+    border-radius: 8px; /* слегка скруглим углы для красоты */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* тень для глубины */
 }
