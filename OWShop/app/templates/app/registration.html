@@ -1,6 +1,8 @@
 {% extends "app/layout.html" %}
 {% block content %}
 
+
+    <section class="feedback-section">
 <h2>Регистрация пользователей</h2>
     <form method="POST" > {% csrf_token %}
         <div>
@@ -10,6 +12,6 @@
 Зарегистрировать </button>
         </div>
     </form>
-
+    </section>        
 {% endblock %}
     

@@ -234,9 +234,9 @@ video, VIDEO {
 
 .blogimg {
     display: block;
-    max-width: 100%;
+    width: 100%;
     height: auto;
     margin: 20px auto; /* вертикальные отступы и выравнивание по центру */
-    border-radius: 8px; /* слегка скруглим углы для красоты */
+    border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* тень для глубины */
 }
