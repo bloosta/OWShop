@@ -1,0 +1,242 @@
+﻿body {
+    padding-top: 100px;
+    padding-bottom: 20px;
+    font-family: Arial;
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.logo {
+    max-width: 50px;
+    margin-right: 10px;
+}
+
+.navbar li {
+    margin-top: 15px;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float: none;
+}
+
+.jumbotron {
+    background-color: #333
+}
+
+.btn, .btn:hover {
+    background-color: #f99e1a;
+    color: #ffffff;
+    border: none;
+}
+
+.orange {
+    color: #f99e1a;
+}
+
+.link-section a {
+    text-decoration: none;
+    /*    font-size: 24px;*/
+}
+
+/*.link-section {
+    font-size: 24px;
+}*/
+
+.feedback-section {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.feedback-form {
+    align-items: center;
+}
+
+    .feedback-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea,
+    .feedback-form select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+
+    .feedback-form textarea {
+        height: 150px;
+        resize: vertical;
+    }
+
+.submit-button {
+    background-color: #f99e1a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    .submit-button:hover {
+        background-color: #333;
+    }
+
+.success-message {
+    color: #f99e1a;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.glide__slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.glide {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 450px;
+}
+
+a {
+    color: #f99e1a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #ff7f32;
+        text-decoration: none;
+    }
+
+section {
+    margin-bottom: 20px; 
+    padding-bottom: 20px; 
+    border-bottom: 2px solid #fff; 
+}
+
+    section:last-of-type {
+        border-bottom: none; 
+    }
+
+
+section {
+    margin-bottom: 20px; 
+    padding: 20px; 
+    background-color: #2a2a2a; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+    section h2 {
+        margin-top: 0;
+        color: #f99e1a; 
+    }
+
+    section .date {
+        font-style: italic;
+        color: #ccc; 
+    }
+
+    section .read-more {
+        font-weight: bold; 
+
+    }
+div[data-glide-el="controls"] {
+    display: flex;
+    justify-content: center;
+    gap: 1010px;
+    margin-top: 10px;
+}
+
+    div[data-glide-el="controls"] button {
+        padding: 5px 15px;
+        background-color: #f99e1a;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        div[data-glide-el="controls"] button:hover {
+            background-color: #ff7f32;
+        }
+
+h4 {
+    color: #f99e1a;
+}
+h7{
+    font-style: italic;
+}
+
+video, VIDEO {
+    display: block;
+    margin: 20px auto; /* по центру и отступы сверху/снизу */
+    max-width: 100%; /* адаптивная ширина */
+    height: auto; /* сохраняем пропорции */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.blogimg {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 20px auto; /* вертикальные отступы и выравнивание по центру */
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* тень для глубины */
+}
