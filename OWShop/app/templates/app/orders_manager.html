@@ -1,0 +1,17 @@
+﻿{% extends 'app/layout.html' %}
+{% block title %}Заказы (менеджер){% endblock %}
+{% block content %}
+<h1>Все заказы</h1>
+    {% if orders %}
+<ul>
+    {% for o in orders %}
+    <li>
+        <a href="{% url 'order_detail' o.id %}">Заказ #{{ o.id }}</a>
+        — {{ o.customer.username }} — {{ o.get_status_display }} — {{ o.total_price }} ₽
+    </li>
+    {% endfor %}
+</ul>
+    {% else %}
+<p>Заказов нет.</p>
+    {% endif %}
+{% endblock %}

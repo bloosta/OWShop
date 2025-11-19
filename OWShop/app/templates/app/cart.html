@@ -1,0 +1,29 @@
+{% extends 'app/layout.html' %}
+{% block title %}Корзина{% endblock %}
+{% block content %}
+<h1>Ваша корзина</h1>
+    {% if items %}
+<form method="post" action="{% url 'update_cart' %}">
+    {% csrf_token %}
+    <table>
+        <thead><tr><th>Товар</th><th>Цена</th><th>Кол-во</th><th>Сумма</th></tr></thead>
+        <tbody>
+            {% for it in items %}
+            <tr>
+                <td><a href="{% url 'product_detail' it.product.slug %}">{{ it.product.title }}</a></td>
+                <td>{{ it.price }}</td>
+                <td><input type="number" name="qty_{{ it.product.id }}" value="{{ it.quantity }}" min="0"></td>
+                <td>{{ it.line_total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Итого: <strong>{{ total }}</strong></p>
+    <button type="submit" class="submit-button">Обновить корзину</button>
+    <a href="{% url 'checkout' %}" class="submit-button">Оформить заказ</a>
+</form>
+    {% else %}
+<p>Корзина пуста.</p>
+<a href="{% url 'catalog_list' %}">Перейти в каталог</a>
+    {% endif %}
+{% endblock %}

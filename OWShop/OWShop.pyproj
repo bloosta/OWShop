@@ -33,6 +33,8 @@
   <ItemGroup>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
+    <Compile Include="app\templatetags\user_tags.py" />
+    <Compile Include="app\templatetags\__init__.py" />
     <Compile Include="app\tests.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
@@ -46,6 +48,7 @@
   <ItemGroup>
     <Folder Include="app\" />
     <Folder Include="app\migrations\" />
+    <Folder Include="app\templatetags\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\content\" />
@@ -75,10 +78,17 @@
     <Content Include="app\static\app\scripts\pool.js" />
     <Content Include="app\templates\app\blog_detail.html" />
     <Content Include="app\templates\app\blog_list.html" />
+    <Content Include="app\templates\app\cart.html" />
+    <Content Include="app\templates\app\contact.html" />
+    <Content Include="app\templates\app\category.html" />
     <Content Include="app\templates\app\links.html" />
+    <Content Include="app\templates\app\my_orders.html" />
     <Content Include="app\templates\app\newpost.html" />
     <Content Include="app\templates\app\oldabout.html" />
+    <Content Include="app\templates\app\orders_manager.html" />
+    <Content Include="app\templates\app\order_detail.html" />
     <Content Include="app\templates\app\pool.html" />
+    <Content Include="app\templates\app\product_detail.html" />
     <Content Include="app\templates\app\registration.html" />
     <Content Include="app\templates\app\videopost.html" />
     <Content Include="requirements.txt" />
