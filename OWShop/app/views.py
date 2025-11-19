@@ -347,11 +347,31 @@ def my_orders(request):
 @login_required
 def order_detail(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
-    # разрешаем просматривать детали своему заказу, менеджерам и админам
+
+    # Разрешаем просматривать детали своему заказу, менеджерам и админам
     if request.user != order.customer and not is_manager(request.user) and not request.user.is_superuser:
         messages.error(request, "Просмотр заказа запрещён.")
         return redirect('home')
-    return render(request, 'app/order_detail.html', {'order': order, 'title': f'Заказ #{order.id}'})
+
+    # Флаг — может ли текущий пользователь менять статус
+    can_change_status = request.user.is_authenticated and (is_manager(request.user) or request.user.is_superuser)
+
+    # Подготовим список статусов с пометкой selected — чтобы шаблон не делал сравнений
+    status_list = []
+    for val, label in Order.STATUS_CHOICES:
+        status_list.append({
+            'val': val,
+            'label': label,
+            'selected': (order.status == val)
+        })
+
+    context = {
+        'order': order,
+        'title': f'Заказ #{order.id}',
+        'can_change_status': can_change_status,
+        'status_list': status_list,
+    }
+    return render(request, 'app/order_detail.html', context)
 
 # ---- Заказы для менеджера ----
 @login_required

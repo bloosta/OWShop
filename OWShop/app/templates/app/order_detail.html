@@ -1,48 +1,30 @@
 ﻿{% extends 'app/layout.html' %}
-{% load user_tags %}
 {% block title %}Заказ #{{ order.id }}{% endblock %}
 {% block content %}
 <h1>Заказ #{{ order.id }}</h1>
 <p>Клиент: {{ order.customer.username }}</p>
 <p>Статус: {{ order.get_status_display }}</p>
 <p>Создан: {{ order.created_at }}</p>
+
 <h3>Позиции</h3>
 <ul>
     {% for it in order.items.all %}
     <li>{{ it.product.title }} — {{ it.quantity }} × {{ it.price }} = {{ it.line_total }}</li>
     {% endfor %}
 </ul>
+
 <p>Итого: {{ order.total_price }} ₽</p>
 
-    {# Надёжная проверка прав: сначала проверяем аутентификацию, затем отдельно — принадлежность к группе или суперадмин #}
-    {% if user.is_authenticated %}
-        {% if user|has_group:"Manager" %}
+    {% if can_change_status %}
 <form method="post" action="{% url 'order_set_status' order.id %}">
     {% csrf_token %}
     <label for="status">Изменить статус</label>
     <select name="status" id="status">
-        {% for val, label in order.STATUS_CHOICES %}
-        {% ifequal order.status val %}
-        <option value="{{ val }}" selected>{{ label }}</option>
-        {% else %}
-        <option value="{{ val }}">{{ label }}</option>
-        {% endifequal %}
-        {% endfor %}
-    </select>
-
-    <button type="submit" class="submit-button">Сохранить</button>
-</form>
-        {% elif user.is_superuser %}
-<form method="post" action="{% url 'order_set_status' order.id %}">
-    {% csrf_token %}
-    <label for="status">Изменить статус</label>
-    <select name="status" id="status">
-        {% for val, label in order.STATUS_CHOICES %}
-        <option value="{{ val }}" {% if order.status= =val %}selected{% endif %}>{{ label }}</option>
+        {% for s in status_list %}
+        <option value="{{ s.val }}" {% if s.selected %}selected{% endif %}>{{ s.label }}</option>
         {% endfor %}
     </select>
     <button type="submit" class="submit-button">Сохранить</button>
 </form>
-        {% endif %}
     {% endif %}
 {% endblock %}
