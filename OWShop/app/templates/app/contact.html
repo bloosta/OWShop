@@ -1,15 +1,16 @@
 {% extends 'app/layout.html' %}
-{% block title %}Каталог{% endblock %}
+{% block title %}Контакты{% endblock %}
 {% block content %}
-<h1>Каталог</h1>
-<div class="categories">
-    {% for cat in categories %}
-    <section class="feedback-section">
-        <h2><a href="{% url 'category_detail' cat.slug %}">{{ cat.name }}</a></h2>
-        <p>{{ cat.description|truncatewords:30 }}</p>
-    </section>
+<h1>Контакты</h1>
+<p><strong>Адрес:</strong> {{ address }}</p>
+<p><strong>Телефоны:</strong></p>
+<ul>
+    {% for p in phones %}
+    <li>{{ p }}</li>
     {% empty %}
-    <p>Категорий пока нет.</p>
+    <li>Телефоны не указаны</li>
     {% endfor %}
-</div>
+</ul>
+<p><strong>Разработчик сайта:</strong> {{ developer }}</p>
+<p><strong>Год:</strong> {{ year }}</p>
 {% endblock %}

@@ -5,6 +5,8 @@
     <Name>OWShop</Name>
     <RootNamespace>OWShop</RootNamespace>
     <InterpreterId>MSBuild|.venv|$(MSBuildProjectFullPath)</InterpreterId>
+    <CommandLineArguments>
+    </CommandLineArguments>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +18,7 @@
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
-    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <WebBrowserUrl>http://localhost:8080</WebBrowserUrl>
     <LaunchProvider>Django launcher</LaunchProvider>
     <DjangoSettingsModule>OWShop.settings</DjangoSettingsModule>
     <OutputPath>.</OutputPath>

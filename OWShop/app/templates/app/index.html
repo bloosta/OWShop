@@ -6,7 +6,10 @@
 <div class="jumbotron">
     <h1>OWShop</h1>
     <p class="lead">OWShop — это сайт, созданный преданными фанатами для таких же фанатов Overwatch 2 - командного шутера от Blizzard Entertainment.</p>
-    <p><a href="https://overwatch.blizzard.com/" class="btn btn-primary">Узнать больше</a></p>
+    <p>
+        <a href="https://overwatch.blizzard.com/" class="btn btn-primary">Узнать больше</a>
+        <a href="{% url 'catalog_list' %}" class="btn btn-success">Перейти в каталог</a>
+    </p>
 </div>
 
 <div class="row">
@@ -26,28 +29,71 @@
     </div>
 </div>
 
-    <div class="glide">
-         <div class="glide__track" data-glide-el="track">
-             <ul class="glide__slides">
-                 <li class="glide__slide"><img src="{% static 'app/content/slider1.avif' %}" alt="ing1"></li>
-                 <li class="glide__slide"><img src="{% static 'app/content/slider1.jpg' %}" alt="img2"></li>
-                 <li class="glide__slide"><img src="{% static 'app/content/slider3.jpg' %}" alt="img3"></li>
-                 <li class="glide__slide"><img src="{% static 'app/content/slider2.avif' %}" alt="img4"></li>
-             </ul>
-         </div>
-         <div data-glide-el="controls">
-             <button data-glide-dir="<">Пред</button>
-             <button data-glide-dir=">">След</button>
-         </div>
-     </div>
-     <script>
-         new Glide('.glide', {
-             type: 'carousel',
-             autoplay: 3000,
-             hoverpause: true,
-             perView: 1,
-         }).mount();
-     </script>
-     
-     
+<!-- Последние новости -->
+<section class="latest-news" style="margin-top:30px;">
+    <h2>Последние новости</h2>
+
+    {# Отладочная подсказка: покажем сколько новостей пришло из view #}
+    <p class="text-muted" style="font-size:0.9em;">Найдено новостей: {{ latest_news|length }}</p>
+
+    {% if latest_news %}
+    <div class="row">
+        {% for post in latest_news %}
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>
+                        <a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a>
+                    </h4>
+                    <p class="text-muted" style="font-size:0.9em;">
+                        {{ post.posted|date:"d.m.Y H:i" }}
+                    </p>
+
+                    {# Показываем короткое описание, если есть; иначе — выдержку из content #}
+                    {% if post.description %}
+                    <p>{{ post.description|truncatewords:30|linebreaksbr }}</p>
+                    {% else %}
+                    <p>{{ post.content|truncatewords:30|linebreaksbr }}</p>
+                    {% endif %}
+
+                    <p><a href="{% url 'blog_detail' post.id %}">Читать дальше &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <p><a href="{% url 'blog_list' %}">Все новости</a></p>
+    {% else %}
+    <p>Новостей пока нет. <a href="{% url 'blog_list' %}">Посмотреть блог</a></p>
+    {% endif %}
+</section>
+
+<div class="glide" style="margin-top:30px;">
+    <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+            <li class="glide__slide"><img src="{% static 'app/content/slider1.avif' %}" alt="img1" class="img-responsive"></li>
+            <li class="glide__slide"><img src="{% static 'app/content/slider1.jpg' %}" alt="img2" class="img-responsive"></li>
+            <li class="glide__slide"><img src="{% static 'app/content/slider3.jpg' %}" alt="img3" class="img-responsive"></li>
+            <li class="glide__slide"><img src="{% static 'app/content/slider2.avif' %}" alt="img4" class="img-responsive"></li>
+        </ul>
+    </div>
+    <div data-glide-el="controls">
+        <button data-glide-dir="<" class="btn btn-default">Пред</button>
+        <button data-glide-dir=">" class="btn btn-default">След</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof Glide !== 'undefined') {
+            new Glide('.glide', {
+                type: 'carousel',
+                autoplay: 3000,
+                hoverpause: true,
+                perView: 1,
+            }).mount();
+        }
+    });
+</script>
+
 {% endblock %}
