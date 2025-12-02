@@ -1,15 +1,58 @@
 ﻿{% extends 'app/layout.html' %}
+{% load static %}
 {% block title %}{{ product.title }}{% endblock %}
+
 {% block content %}
-<h1>{{ product.title }}</h1>
-    {% if product.image %}
-<img src="{{ product.image.url }}" alt="{{ product.title }}" style="max-width:300px;">
-    {% endif %}
-<p>{{ product.description|linebreaksbr }}</p>
-<p>Цена: <strong>{{ product.price }} ₽</strong></p>
-<p>В наличии: {{ product.stock }}</p>
-<form method="post" action="{% url 'add_to_cart' product.slug %}">
-    {% csrf_token %}
-    <button type="submit" class="submit-button">Добавить в корзину</button>
-</form>
+<section class="product-detail">
+    <div class="left">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-responsive">
+        {% else %}
+        <img src="{% static 'app/content/no-image.png' %}" alt="no image" class="img-responsive">
+        {% endif %}
+    </div>
+
+    <div class="right">
+        <h1 style="margin-top:0;">{{ product.title }}</h1>
+
+        <p class="small-muted">
+            Категория:
+            {% if product.category %}<a href="{% url 'category_detail' product.category.slug %}">{{ product.category.name }}</a>{% else %}—{% endif %}
+        </p>
+
+        <p class="product-short" style="margin-top:6px;">
+            {% if product.description %}
+            {{ product.description|linebreaksbr }}
+            {% else %}
+            <em>Описание товара отсутствует.</em>
+            {% endif %}
+        </p>
+
+        <p class="price">Цена: <span style="font-weight:900;">{{ product.price }} ₽</span></p>
+
+        <p class="stock">
+            {% if product.stock > 0 %}
+            В наличии: {{ product.stock }}
+            {% else %}
+            Нет в наличии
+            {% endif %}
+        </p>
+
+        <div class="buy-row">
+            <form method="post" action="{% url 'add_to_cart' product.slug %}">
+                {% csrf_token %}
+                <button type="submit" class="submit-button">Добавить в корзину</button>
+            </form>
+
+            <a href="{% url 'catalog_list' %}" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600;">
+                Вернуться в каталог
+            </a>
+        </div>
+
+        <div style="margin-top:18px;">
+            <p class="small-muted">Добавлен: {{ product.created_at|date:"d.m.Y H:i" }}</p>
+            <p class="small-muted">Артикул: {{ product.slug }}</p>
+        </div>
+    </div>
+</section>
 {% endblock %}

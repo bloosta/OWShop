@@ -1,30 +1,48 @@
-﻿body {
-    padding-top: 100px;
-    padding-bottom: 20px;
-    font-family: Arial;
-    background-color: #1a1a1a;
-    color: #ffffff;
+﻿/* OWShop — site.css (dark theme, улучшенная адаптивность и стили карточек) */
+
+/* Базовые переменные */
+:root {
+    --accent: #f99e1a;
+    --accent-variant: #ff7f32;
+    --bg-dark: #1a1a1a;
+    --panel-bg: #2a2a2a;
+    --muted: #c4c4c4;
+    --card-radius: 8px;
+    --container-max: 1180px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
+/* Боди */
+body {
+    padding-top: 100px;
+    padding-bottom: 20px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Контейнер страницы */
+.container.body-content {
+    max-width: var(--container-max);
+    margin: 0 auto;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+/* Формы */
+input, select, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    color: #111;
 }
 
-/* styles for validation helpers */
-.field-validation-error {
+/* Валидация */
+.field-validation-error, .validation-summary-errors {
     color: #b94a48;
 }
 
-.field-validation-valid {
+.field-validation-valid, .validation-summary-valid {
     display: none;
 }
 
@@ -32,211 +50,273 @@ input.input-validation-error {
     border: 1px solid #b94a48;
 }
 
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
-
-.validation-summary-errors {
-    color: #b94a48;
-}
-
-.validation-summary-valid {
-    display: none;
-}
-
+/* Логотип */
 .logo {
     max-width: 50px;
     margin-right: 10px;
 }
 
-.navbar li {
-    margin-top: 15px;
-}
-
-.navbar-nav > li {
-    display: inline-block;
-    float: none;
-}
-
-.jumbotron {
-    background-color: #333
-}
-
-.btn, .btn:hover {
-    background-color: #f99e1a;
-    color: #ffffff;
+/* Навигация */
+.navbar {
+    background-color: #0f1214;
     border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-.orange {
-    color: #f99e1a;
+    .navbar li {
+        margin-top: 0;
+    }
+
+.navbar-nav > li > a {
+    color: #fff;
+    padding: 14px 12px;
+    font-weight: 600;
 }
 
-.link-section a {
-    text-decoration: none;
-    /*    font-size: 24px;*/
-}
+    .navbar-nav > li > a:hover {
+        color: var(--accent);
+    }
 
-/*.link-section {
-    font-size: 24px;
-}*/
-
-.feedback-section {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    border: 1px solid #ddd;
+/* Jumbotron */
+.jumbotron {
+    background-color: #262626;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    align-items: center;
+    padding: 28px;
+    margin-top: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
-.feedback-form {
-    align-items: center;
+    .jumbotron h1 {
+        color: var(--accent);
+    }
+
+    .jumbotron .lead {
+        color: var(--muted);
+    }
+
+/* Кнопки */
+.btn, .submit-button {
+    background-color: var(--accent);
+    color: #111;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-    .feedback-form label {
-        display: block;
-        margin-bottom: 8px;
+    .btn:hover, .submit-button:hover {
+        background-color: var(--accent-variant);
+        color: #fff;
+    }
+
+/* Ссылки */
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color .15s ease;
+}
+
+    a:hover {
+        color: var(--accent-variant);
+        text-decoration: none;
+    }
+
+/* Секции/карточки */
+section {
+    margin-bottom: 20px;
+    padding: 18px;
+    background-color: var(--panel-bg);
+    border-radius: var(--card-radius);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+    section h2 {
+        margin-top: 0;
+        color: var(--accent);
+    }
+
+    section .date {
+        font-style: italic;
+        color: var(--muted);
+    }
+
+    section .read-more {
         font-weight: bold;
     }
 
-    .feedback-form input,
-    .feedback-form textarea,
-    .feedback-form select {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-family: inherit;
-    }
-
-    .feedback-form textarea {
-        height: 150px;
-        resize: vertical;
-    }
-
-.submit-button {
-    background-color: #f99e1a;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+/* Feedback section / generic card */
+.feedback-section {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: var(--card-radius);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border: 1px solid rgba(255,255,255,0.03);
 }
 
-    .submit-button:hover {
-        background-color: #333;
-    }
-
-.success-message {
-    color: #f99e1a;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
+/* Слайдер */
 .glide__slide img {
     width: 100%;
     height: 400px;
     object-fit: cover;
+    border-radius: 6px;
 }
 
 .glide {
     margin-top: 20px;
     margin-bottom: 20px;
-    height: 450px;
 }
 
-a {
-    color: #f99e1a;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-    a:hover {
-        color: #ff7f32;
-        text-decoration: none;
-    }
-
-section {
-    margin-bottom: 20px; 
-    padding-bottom: 20px; 
-    border-bottom: 2px solid #fff; 
-}
-
-    section:last-of-type {
-        border-bottom: none; 
-    }
-
-
-section {
-    margin-bottom: 20px; 
-    padding: 20px; 
-    background-color: #2a2a2a; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-}
-
-    section h2 {
-        margin-top: 0;
-        color: #f99e1a; 
-    }
-
-    section .date {
-        font-style: italic;
-        color: #ccc; 
-    }
-
-    section .read-more {
-        font-weight: bold; 
-
-    }
 div[data-glide-el="controls"] {
     display: flex;
     justify-content: center;
-    gap: 1010px;
+    gap: 12px;
     margin-top: 10px;
 }
 
     div[data-glide-el="controls"] button {
-        padding: 5px 15px;
-        background-color: #f99e1a;
-        color: white;
+        padding: 6px 12px;
+        background-color: var(--accent);
+        color: #111;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         cursor: pointer;
     }
 
         div[data-glide-el="controls"] button:hover {
-            background-color: #ff7f32;
+            background-color: var(--accent-variant);
         }
 
+/* Типографика */
 h4 {
-    color: #f99e1a;
-}
-h7{
-    font-style: italic;
+    color: var(--accent);
 }
 
+h7 {
+    font-style: italic;
+    color: var(--muted);
+}
+
+.text-muted {
+    color: var(--muted);
+}
+
+/* Медиа элементы */
 video, VIDEO {
     display: block;
-    margin: 20px auto; /* по центру и отступы сверху/снизу */
-    max-width: 100%; /* адаптивная ширина */
-    height: auto; /* сохраняем пропорции */
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.45);
 }
-
 
 .blogimg {
     display: block;
     width: 100%;
     height: auto;
-    margin: 20px auto; /* вертикальные отступы и выравнивание по центру */
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* тень для глубины */
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.45);
+}
+
+/* Таблицы корзины */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+    table thead th {
+        text-align: left;
+        padding: 10px 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        color: var(--muted);
+    }
+
+    table tbody td {
+        padding: 10px 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+/* Product detail layout */
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+}
+
+    .product-detail .left {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+        .product-detail .left img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        }
+
+    .product-detail .right {
+        padding: 6px 4px;
+    }
+
+    .product-detail .price {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--accent);
+        margin: 12px 0;
+    }
+
+    .product-detail .stock {
+        display: inline-block;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-weight: 700;
+        background: rgba(255,255,255,0.03);
+        color: var(--muted);
+    }
+
+    .product-detail .buy-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 14px;
+    }
+
+/* Мобильные стили */
+@media (max-width: 900px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .glide__slide img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    body {
+        padding-top: 80px;
+    }
+
+    .jumbotron {
+        padding: 18px;
+    }
+}
+
+/* Утилиты */
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.small-muted {
+    color: var(--muted);
+    font-size: 0.9rem;
 }
