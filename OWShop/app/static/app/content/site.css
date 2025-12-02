@@ -1,128 +1,120 @@
-﻿/* OWShop — site.css (dark theme, улучшенная адаптивность и стили карточек) */
-
-/* Базовые переменные */
-:root {
+﻿:root {
     --accent: #f99e1a;
-    --accent-variant: #ff7f32;
+    --accent-strong: #ff7f32;
     --bg-dark: #1a1a1a;
     --panel-bg: #2a2a2a;
-    --muted: #c4c4c4;
+    --muted: #cfcfcf;
     --card-radius: 8px;
     --container-max: 1180px;
+    --text-on-accent: #111;
+    /* высота шапки — при необходимости увеличьте (например, 80px или 90px) */
+    --navbar-height: 70px;
 }
 
-/* Боди */
-body {
-    padding-top: 100px;
-    padding-bottom: 20px;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    background-color: var(--bg-dark);
-    color: #ffffff;
+/* Базовые */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+    background: var(--bg-dark);
+    color: #fff;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-/* Контейнер страницы */
 .container.body-content {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 18px;
 }
 
-/* Формы */
-input, select, textarea {
-    max-width: 100%;
-    box-sizing: border-box;
-    font-family: inherit;
-    color: #111;
-}
-
-/* Валидация */
-.field-validation-error, .validation-summary-errors {
-    color: #b94a48;
-}
-
-.field-validation-valid, .validation-summary-valid {
-    display: none;
-}
-
-input.input-validation-error {
-    border: 1px solid #b94a48;
-}
-
-/* Логотип */
-.logo {
-    max-width: 50px;
-    margin-right: 10px;
-}
-
-/* Навигация */
-.navbar {
-    background-color: #0f1214;
+/* FIX: фиксированная шапка — смещаем контент вниз и настраиваем скролл */
+.navbar, .navbar-fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    background-color: #0f1214; /* сохраняем фон */
     border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    padding: 8px 12px;
+}
+/* Смещение основного контента вниз на высоту шапки + небольшой запас */
+.container.body-content {
+    padding-top: calc(var(--navbar-height) + 18px);
+}
+/* Помогает якорям не прятаться под шапкой */
+html {
+    scroll-padding-top: calc(var(--navbar-height) + 8px);
 }
 
-    .navbar li {
-        margin-top: 0;
-    }
+/* Заголовки */
+h1, h2, h3, h4 {
+    color: #fff;
+    margin-top: .25rem;
+    margin-bottom: .6rem;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--accent);
+}
+
+h2 {
+    font-size: 1.4rem;
+    color: var(--accent);
+}
+
+.text-muted, .small-muted {
+    color: var(--muted);
+    font-size: .95rem;
+}
+
+/* Навигация (перенесено/сохранено) */
+.navbar-brand img.logo {
+    height: 42px;
+    width: auto;
+    margin-right: 8px;
+}
 
 .navbar-nav > li > a {
     color: #fff;
-    padding: 14px 12px;
+    padding: 12px 10px;
     font-weight: 600;
 }
 
     .navbar-nav > li > a:hover {
         color: var(--accent);
+        text-decoration: none;
     }
 
 /* Jumbotron */
 .jumbotron {
     background-color: #262626;
-    border-radius: 8px;
-    padding: 28px;
+    border-radius: var(--card-radius);
+    padding: 26px;
     margin-top: 10px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
     .jumbotron h1 {
         color: var(--accent);
+        margin-bottom: 6px;
     }
 
     .jumbotron .lead {
         color: var(--muted);
+        font-size: 1rem;
     }
 
-/* Кнопки */
-.btn, .submit-button {
-    background-color: var(--accent);
-    color: #111;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 14px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-    .btn:hover, .submit-button:hover {
-        background-color: var(--accent-variant);
-        color: #fff;
-    }
-
-/* Ссылки */
-a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color .15s ease;
-}
-
-    a:hover {
-        color: var(--accent-variant);
-        text-decoration: none;
-    }
-
-/* Секции/карточки */
+/* Панели/карточки/section общий стиль */
 section {
     margin-bottom: 20px;
     padding: 18px;
@@ -137,36 +129,226 @@ section {
         color: var(--accent);
     }
 
-    section .date {
-        font-style: italic;
-        color: var(--muted);
-    }
-
-    section .read-more {
-        font-weight: bold;
-    }
-
-/* Feedback section / generic card */
-.feedback-section {
-    max-width: 100%;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: var(--card-radius);
+.panel {
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+    .panel .panel-body {
+        padding: 14px;
+        color: #e6e6e6;
+    }
+
+/* -- Исправление (1) — Последние новости на главной: контраст/цвет ссылок -- */
+.latest-news .panel {
+    background: var(--panel-bg);
     border: 1px solid rgba(255,255,255,0.03);
 }
 
-/* Слайдер */
+    .latest-news .panel .panel-body {
+        color: #e6e6e6;
+    }
+
+        .latest-news .panel .panel-body h4 {
+            margin: 0 0 6px 0;
+            font-size: 1.05rem;
+        }
+
+            .latest-news .panel .panel-body h4 a {
+                color: var(--accent);
+                font-weight: 700;
+                text-decoration: none;
+            }
+
+                .latest-news .panel .panel-body h4 a:hover {
+                    color: var(--accent-strong);
+                    text-decoration: underline;
+                }
+
+        .latest-news .panel .panel-body p {
+            color: #e6e6e6;
+        }
+
+/* feedback / category cards */
+.feedback-section {
+    width: 100%;
+    padding: 18px;
+    margin: 12px 0;
+    border-radius: var(--card-radius);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+    .feedback-section h2, .feedback-section h3 {
+        color: var(--accent);
+        margin-bottom: 6px;
+    }
+
+    .feedback-section p {
+        color: #e6e6e6;
+        line-height: 1.5;
+    }
+
+/* Кнопки — единый стиль + hover (2) */
+.btn, .submit-button, button, input[type=submit], a.button {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--text-on-accent);
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform .14s ease, box-shadow .14s ease, background-color .14s ease;
+}
+
+    .btn:hover, .submit-button:hover, a.button:hover, input[type=submit]:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 22px rgba(0,0,0,0.6);
+        background: var(--accent-strong);
+        color: #fff;
+    }
+
+/* Для .btn-default и др. — также даём hover lift */
+.btn-default {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.04);
+    font-weight: 600;
+    transition: transform .14s ease, background-color .14s ease;
+}
+
+    .btn-default:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+    }
+
+/* Формы, валидация */
+input, textarea, select {
+    font-family: inherit;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    color: #fff;
+    width: 100%;
+}
+
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: rgba(255,255,255,0.14);
+        background: rgba(255,255,255,0.03);
+    }
+
+.field-validation-error, .validation-summary-errors {
+    color: #b94a48;
+}
+
+.field-validation-valid, .validation-summary-valid {
+    display: none;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.feedback-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* =============== Product detail (карточка товара) =============== */
+/* увеличим gap и добавим внутренние отступы, чтобы фото и блоки не прилегали вплотную (3) */
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+    .product-detail .left {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 12px;
+    }
+
+        .product-detail .left img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+            margin-right: 12px;
+        }
+
+    .product-detail .right {
+        padding: 12px;
+    }
+
+    .product-detail .price {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--accent);
+        margin: 10px 0;
+    }
+
+    .product-detail .stock {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.02);
+        color: var(--muted);
+        font-weight: 700;
+    }
+
+    .product-detail .buy-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+    }
+
+        .product-detail .buy-row .submit-button {
+            padding: 10px 16px;
+        }
+
+/* для маленьких экранов — вертикально */
+@media (max-width:900px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+    }
+
+        .product-detail .left {
+            padding: 8px 0;
+        }
+
+        .product-detail .right {
+            padding: 6px 0;
+        }
+
+    .jumbotron {
+        padding: 18px;
+    }
+}
+
+/* Слайдер (glide) */
+.glide {
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
 .glide__slide img {
     width: 100%;
     height: 400px;
     object-fit: cover;
     border-radius: 6px;
-}
-
-.glide {
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 div[data-glide-el="controls"] {
@@ -178,55 +360,15 @@ div[data-glide-el="controls"] {
 
     div[data-glide-el="controls"] button {
         padding: 6px 12px;
-        background-color: var(--accent);
-        color: #111;
-        border: none;
         border-radius: 6px;
-        cursor: pointer;
     }
-
-        div[data-glide-el="controls"] button:hover {
-            background-color: var(--accent-variant);
-        }
-
-/* Типографика */
-h4 {
-    color: var(--accent);
-}
-
-h7 {
-    font-style: italic;
-    color: var(--muted);
-}
-
-.text-muted {
-    color: var(--muted);
-}
-
-/* Медиа элементы */
-video, VIDEO {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.45);
-}
-
-.blogimg {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.45);
-}
 
 /* Таблицы корзины */
 table {
     width: 100%;
     border-collapse: collapse;
     color: #fff;
+    margin-bottom: 12px;
 }
 
     table thead th {
@@ -234,6 +376,7 @@ table {
         padding: 10px 8px;
         border-bottom: 1px solid rgba(255,255,255,0.06);
         color: var(--muted);
+        font-weight: 600;
     }
 
     table tbody td {
@@ -241,72 +384,26 @@ table {
         border-bottom: 1px solid rgba(255,255,255,0.03);
     }
 
-/* Product detail layout */
-.product-detail {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-    align-items: start;
+input[type=number] {
+    width: 90px;
+    padding: 6px;
 }
 
-    .product-detail .left {
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-    }
+/* Видео/блог картинки */
+video, VIDEO {
+    display: block;
+    margin: 18px auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
 
-        .product-detail .left img {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-        }
-
-    .product-detail .right {
-        padding: 6px 4px;
-    }
-
-    .product-detail .price {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: var(--accent);
-        margin: 12px 0;
-    }
-
-    .product-detail .stock {
-        display: inline-block;
-        margin-bottom: 12px;
-        padding: 6px 10px;
-        border-radius: 20px;
-        font-weight: 700;
-        background: rgba(255,255,255,0.03);
-        color: var(--muted);
-    }
-
-    .product-detail .buy-row {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        margin-top: 14px;
-    }
-
-/* Мобильные стили */
-@media (max-width: 900px) {
-    .product-detail {
-        grid-template-columns: 1fr;
-    }
-
-    .glide__slide img {
-        height: 220px;
-        object-fit: cover;
-    }
-
-    body {
-        padding-top: 80px;
-    }
-
-    .jumbotron {
-        padding: 18px;
-    }
+.blogimg {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
 
 /* Утилиты */
@@ -316,7 +413,147 @@ table {
     display: block;
 }
 
-.small-muted {
-    color: var(--muted);
-    font-size: 0.9rem;
+.success-message {
+    color: var(--accent);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.orange {
+    color: var(--accent);
+}
+
+/* Ссылки */
+a {
+    color: var(--accent);
+    transition: color .15s ease;
+}
+
+    a:hover {
+        color: var(--accent-strong);
+    }
+
+/* Финальная адаптивность */
+@media (max-width:768px) {
+    .navbar-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .glide__slide img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .feedback-section {
+        padding: 14px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* логотип слева, меню справа */
+    gap: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Группируем бренд и toggle внутри header */
+.navbar-header {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Бренд (логотип + текст, если есть) */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-right: 12px;
+    color: #fff; /* на всякий случай */
+    text-decoration: none;
+}
+
+    /* Логотип подогнать под высоту шапки */
+    .navbar-brand img.logo {
+        height: calc(var(--navbar-height) - 18px); /* подберите +/- при необходимости */
+        max-height: calc(var(--navbar-height) - 10px);
+        width: auto;
+        display: block;
+        margin: 0;
+    }
+
+/* Навигационная часть (справа) */
+.navbar-collapse {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+}
+
+/* Список пунктов меню: горизонтальный ряд */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    /* Каждый пункт — без float, с отступами */
+    .navbar-nav > li {
+        float: none !important;
+        margin: 0 8px;
+    }
+
+/* Стили для кнопки-toggle (гамбургер) — скрываем на больших экранах */
+.navbar-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #fff;
+}
+
+/* Поддержка мобильного (показать toggle и вертикальное меню) */
+@media (max-width: 768px) {
+    .navbar .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+    /* Когда collapse закрыт — скрываем блок навигации (bootstrap управляет классами .collapse/.in/.show) */
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+        /* Открытый collapse — показываем вертикально */
+        .navbar-collapse.collapse.in,
+        .navbar-collapse.show {
+            display: block !important;
+            width: 100%;
+        }
+
+    .navbar-nav {
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+        .navbar-nav > li {
+            margin: 6px 0;
+        }
+    /* Логотип — чуть меньше на мобильных */
+    .navbar-brand img.logo {
+        height: calc(var(--navbar-height) - 28px);
+    }
 }

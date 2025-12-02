@@ -223,11 +223,15 @@ def _save_cart(request, cart):
 
 
 @require_POST
-@login_required
+@login_required(login_url='/login/')
 def add_to_cart(request, slug):
     if not is_client(request.user):
-        messages.error(request, "Добавлять в корзину могут только клиенты. Пожалуйста, войдите или зарегистрируйтесь.")
-        return redirect('login')
+        # если пользователь не авторизован — его уже перенаправит @login_required,
+        # поэтому сюда попадают аутентифицированные пользователи без роли Client (например, Manager).
+        messages.error(request, "Добавлять в корзину могут только клиенты. Пожалуйста, зарегистрируйтесь или обратитесь к администратору, чтобы получить роль Клиента.")
+        # перенаправляем в каталог (или на главную) — не на страницу логина
+        return redirect('catalog_list')
+
 
     product = get_object_or_404(Product, slug=slug, active=True)
     cart = _get_cart(request)
