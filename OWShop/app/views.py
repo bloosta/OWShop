@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group, User
 from django.views.decorators.http import require_POST
 
-from .forms import PoolForm, CommentForm, BlogForm
+from .forms import CommentForm, BlogForm
 from .models import Blog, Comment, Category, Product, Order, OrderItem, Profile
 
 
