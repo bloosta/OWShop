@@ -1,4 +1,5 @@
-﻿:root {
+﻿@import url('site.css');
+:root {
     --accent: #f99e1a;
     --accent-strong: #ff7f32;
     --bg-dark: #1a1a1a;
@@ -556,4 +557,341 @@ a {
     .navbar-brand img.logo {
         height: calc(var(--navbar-height) - 28px);
     }
+}
+
+
+/* ================= Header: user menu & long username handling ================= */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+    margin-right: 6px;
+    min-width: 0; /* enable flex child shrinking */
+}
+
+/* контейнер с именем и кнопкой */
+.user-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* имя пользователя — не ломает строку, обрезается многоточием при слишком длинном нике */
+.nav-username {
+    max-width: 220px; /* подберите ширину по вашему макету */
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* кнопка выхода — в компактном стиле */
+.btn-logout {
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.04);
+    font-weight: 600;
+}
+
+    .btn-logout:hover {
+        background: rgba(255,255,255,0.10);
+        color: #fff;
+        transform: none;
+        box-shadow: none;
+    }
+
+/* мобильная подстройка: если место маленькое, переносим элементы в колонку */
+@media (max-width: 768px) {
+    .user-menu {
+        min-width: 0;
+    }
+
+    .nav-username {
+        max-width: 140px;
+        font-size: .95rem;
+    }
+
+    .user-row {
+        gap: 6px;
+    }
+
+    .btn-logout {
+        padding: 6px 8px;
+        font-size: .95rem;
+    }
+}
+
+/* ================= Forms / selects contrast fix ================= */
+/* Перекрываем bootstrap .form-control и обеспечиваем видимый текст на тёмном фоне */
+.form-control,
+input.form-control,
+textarea.form-control,
+select.form-control,
+input,
+textarea,
+select {
+    background: rgba(255,255,255,0.02) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    border-radius: 6px !important;
+    padding: 8px 10px !important;
+}
+
+    /* Опции селекта на большинстве браузеров — даём тёмный фон и белый текст */
+    select.form-control option,
+    select option {
+        background: var(--panel-bg) !important;
+        color: #fff !important;
+    }
+
+    /* Для полей состояния/статуса (иногда используются select в таблицах) — увеличим контраст рамки */
+    select:focus,
+    input:focus,
+    textarea:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(249,158,26,0.08);
+        border-color: rgba(255,255,255,0.14) !important;
+    }
+
+/* Убедимся, что placeholder виден (белый / бледный) */
+::placeholder {
+    color: rgba(255,255,255,0.6);
+    opacity: 1;
+}
+
+/* Если где-то селекты/инпуты наследуют белый фон из bootstrap — этот селектор с !important должен переопределять */
+.input-white-fix, .select-white-fix {
+    background: rgba(255,255,255,0.02) !important;
+    color: #fff !important;
+}
+
+/* Мелкие корректировки: меню авторизованного пользователя не ломает навигацию */
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-brand {
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-default, .btn-default:visited {
+    color: #fff;
+}
+
+/* ================= Конец правок ================= */
+
+
+/* ===== Header: точная выравнивака user-menu и пунктов меню ===== */
+.navbar .user-menu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 8px;
+}
+
+/* Уравниваем высоту и вертикальное выравнивание ссылок в меню и username */
+.navbar-nav > li > a,
+.nav-username,
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    height: calc(var(--navbar-height) - 20px); /* выровнять по контенту шапки */
+    line-height: 1;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Уменьшаем вертикальный padding ссылок — чтобы они центрировались */
+.navbar-nav > li > a {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Немного уменьшим высоту username, чтобы он не "висел" */
+.nav-username {
+    padding: 6px 8px;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Сброс margin/паддинг для формы logout чтобы не поднимала блок */
+.logout-form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Кнопка выхода — должна выглядеть как пункт меню (тонкий стиль) */
+.btn-logout {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #fff;
+    padding: 6px 8px;
+    font-weight: 600;
+}
+
+/* На мобильных — вернём поведение столбцом и поправим размеры */
+@media (max-width: 768px) {
+    .nav-username {
+        max-width: 140px;
+        padding: 4px 6px;
+    }
+
+    .navbar-nav > li > a,
+    .btn-logout {
+        height: auto;
+    }
+}
+
+/* ---------------- Blog detail: article layout & image spacing ---------------- */
+.blog-article {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+    .blog-article .main {
+        min-width: 0;
+    }
+
+        .blog-article .main .post-title {
+            margin: 0 0 6px 0;
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .blog-article .main .post-meta {
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-size: .95rem;
+        }
+
+        .blog-article .main .post-content {
+            margin-top: 12px;
+            line-height: 1.6;
+            color: #e9e9e9;
+        }
+
+        /* отступы от картинки и адаптив */
+        .blog-article .main .blogimg {
+            margin: 14px 0;
+            border-radius: 8px;
+            max-width: 100%;
+            display: block;
+        }
+
+    /* сайдбар (автор, быстрые ссылки) */
+    .blog-article .sidebar {
+        background: rgba(255,255,255,0.02);
+        border-radius: var(--card-radius);
+        padding: 12px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+        .blog-article .sidebar h4 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+/* комментарии — используем feedback-section стиль, но чуть компактнее */
+.comment-item {
+    padding: 12px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+    .comment-item .meta {
+        color: var(--muted);
+        font-size: .9rem;
+        margin-bottom: 6px;
+    }
+
+/* мобильная версия для блога */
+@media (max-width: 900px) {
+    .blog-article {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------------- Order detail: align select + button and card look ---------------- */
+.order-card .panel {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+}
+
+/* Сформируем единый размер для селекта и кнопки в форме статуса */
+.order-card .form-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+    /* высота селекта — подгнать так, чтобы совпадало с кнопкой */
+    .order-card .form-row select.form-control,
+    .order-card .form-row select {
+        height: 44px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.02) !important;
+        color: #fff !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        box-sizing: border-box;
+    }
+
+    /* кнопка в той же высоте — делаем flex-центрирование */
+    .order-card .form-row .submit-button,
+    .order-card .form-row button.submit-button {
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border-radius: 8px;
+        font-weight: 800;
+    }
+
+/* Варианты компактного расположения: если узкая колонка, переносим вниз */
+@media (max-width:480px) {
+    .order-card .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .order-card .form-row select.form-control,
+        .order-card .form-row .submit-button {
+            width: 100%;
+            height: 44px;
+        }
+}
+
+/* также чуть-чуть увеличим отступ между панелью управления и кнопкой "к списку заказов" */
+.order-card .panel-body > .btn {
+    margin-top: 10px;
+}
+
+/* общий стиль для заголовков и muted текста внутри order-card */
+.order-card .panel-body h4 {
+    margin-top: 0;
+    color: var(--accent);
+}
+
+.order-card .panel-body .small-muted {
+    color: var(--muted);
+}
+
+/* ---------------- cosmetic tweaks for article and order card spacing ---------------- */
+.post-content p {
+    margin: 0 0 12px 0;
 }

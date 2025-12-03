@@ -1,30 +1,94 @@
 ﻿{% extends 'app/layout.html' %}
 {% block title %}Заказ #{{ order.id }}{% endblock %}
+
 {% block content %}
-<h1>Заказ #{{ order.id }}</h1>
-<p>Клиент: {{ order.customer.username }}</p>
-<p>Статус: {{ order.get_status_display }}</p>
-<p>Создан: {{ order.created_at }}</p>
+<section class="order-card panel">
+    <div class="panel-body">
+        <div class="order-meta" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+            <div>
+                <h1 style="margin:0 0 6px 0;">Заказ #{{ order.id }}</h1>
+                <p class="small-muted" style="margin:0;">Клиент: {{ order.customer.username }}</p>
+                <p class="small-muted" style="margin:2px 0 0 0;">Создан: {{ order.created_at|date:"d.m.Y H:i" }}</p>
+            </div>
 
-<h3>Позиции</h3>
-<ul>
-    {% for it in order.items.all %}
-    <li>{{ it.product.title }} — {{ it.quantity }} × {{ it.price }} = {{ it.line_total }}</li>
-    {% endfor %}
-</ul>
+            <div style="text-align:right;">
+                <p style="margin:0 0 6px 0;" class="small-muted">Текущий статус</p>
+                <div style="font-weight:800;color:var(--accent);font-size:1.05rem;">{{ order.get_status_display }}</div>
+            </div>
+        </div>
 
-<p>Итого: {{ order.total_price }} ₽</p>
+        <hr style="border-color: rgba(255,255,255,0.04); margin:14px 0;">
 
-    {% if can_change_status %}
-<form method="post" action="{% url 'order_set_status' order.id %}">
-    {% csrf_token %}
-    <label for="status">Изменить статус</label>
-    <select name="status" id="status">
-        {% for s in status_list %}
-        <option value="{{ s.val }}" {% if s.selected %}selected{% endif %}>{{ s.label }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit" class="submit-button">Сохранить</button>
-</form>
-    {% endif %}
+        <div class="order-grid" style="display:grid;grid-template-columns:1fr 360px;gap:24px;">
+            <!-- ЛЕВАЯ КОЛОНКА: позиции заказа -->
+            <div class="order-items">
+                <h3 style="margin-top:0;color:var(--accent);">Позиции</h3>
+                <div class="panel" style="background:transparent;border:none;padding:0;">
+                    <div class="panel-body" style="padding:0;">
+                        <ul style="list-style:none;padding:0;margin:0;">
+                            {% for it in order.items.all %}
+                            <li style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.03);">
+                                <div style="max-width:70%;">
+                                    <div style="font-weight:700;color:#fff;">{{ it.product.title }}</div>
+                                    <div class="small-muted" style="margin-top:4px;">{{ it.quantity }} × {{ it.price }} ₽</div>
+                                </div>
+                                <div style="font-weight:800;color:var(--accent);">{{ it.line_total }} ₽</div>
+                            </li>
+                            {% empty %}
+                            <li>Позиции отсутствуют.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;justify-content:flex-end;">
+                    <div style="background:rgba(255,255,255,0.02);padding:10px 14px;border-radius:8px;">
+                        <div class="small-muted">Итого</div>
+                        <div style="font-weight:900;font-size:1.2rem;color:var(--accent);">{{ order.total_price }} ₽</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-status">
+                <div class="panel" style="border-radius:8px;">
+                    <div class="panel-body" style="padding:16px;">
+                        <h4 style="margin-top:0;color:var(--accent);">Управление заказом</h4>
+
+                        {% if can_change_status %}
+                        <form method="post" action="{% url 'order_set_status' order.id %}">
+                            {% csrf_token %}
+                            <div class="form-row" style="margin-top:8px;">
+                                <div style="flex:1;">
+                                    <label for="status" class="small-muted" style="display:block;margin-bottom:6px;font-weight:700;color:#fff;">Статус</label>
+                                    <select name="status" id="status" class="form-control">
+                                        {% for s in status_list %}
+                                        <option value="{{ s.val }}" {% if s.selected %}selected{% endif %}>{{ s.label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div style="min-width:120px;display:flex;align-items:center;">
+                                    <button type="submit" class="submit-button">Сохранить</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div style="margin-top:12px;">
+                            <a href="{% url 'manager_orders' %}" class="btn btn-default" style="width:100%;text-align:center;">К списку заказов</a>
+                        </div>
+                        {% else %}
+                        <div class="small-muted">Вы не можете изменить этот заказ.</div>
+                        {% endif %}
+
+                        <!-- Доп. информация -->
+                        <div style="margin-top:12px;font-size:0.92rem;color:var(--muted);">
+                            <div>Последнее обновление: {{ order.updated_at|date:"d.m.Y H:i" }}</div>
+                            <div>ID заказа: {{ order.id }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

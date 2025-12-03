@@ -18,9 +18,6 @@ from app import views as app_views
 urlpatterns = [
     path('', views.home, name='home'),
     path('contact/', views.contact, name='contact'),
-    path('about/', views.about, name='about'),
-    path('links/', views.links, name='links'),
-    path('pool/', views.pool, name='pool'),
     path('registration/', views.registration, name='registration'),
     path('blog/', views.blog_list, name='blog_list'),
     path('blog/<int:pk>/', views.blog_detail, name='blog_detail'),

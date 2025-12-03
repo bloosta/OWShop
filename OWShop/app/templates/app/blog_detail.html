@@ -1,42 +1,72 @@
 {% extends 'app/layout.html' %}
- {% block title %}{{ post.title }}{% endblock %}
- 
- {% load static %}
- 
-  
- {% block content %}
+{% block title %}{{ post.title }}{% endblock %}
+{% load static %}
 
-     <section>
-         <h1>{{ post.title }}</h1>
-         <p class="date">{{ post.posted }}</p>
-{% if post.image %}
-    <img class="blogimg" src="{{ post.image.url }}" alt="Изображение статьи блога" />
-{% endif %}
-         <div class="content"><p>{{ post.content|linebreaksbr }}</p>  </div>
-         <a href="{% url 'blog_list' %}" class="back-link">Назад к списку</a>
-     </section>
+{% block content %}
+<section class="panel blog-article">
+    <div class="panel-body" style="padding:18px;">
+        <div class="main">
+            <h1 class="post-title">{{ post.title }}</h1>
+            <div class="post-meta">
+                <span class="date">{{ post.posted|date:"d.m.Y H:i" }}</span>
+                {% if post.author %} • <span class="author">Автор: {{ post.author.username }}</span>{% endif %}
+            </div>
 
-     {% if user.is_authenticated %}
-         <section class="feedback-section">
-             <form method="post" class="feedback-form">
-                 <h3>Добавить комментарий</h3>
-                 {% csrf_token %}
-                 <div>
-                     {{ form.as_p }}
-                     <button type="submit" class="submit-button">Отправить комментарий</button>
-                 </div>
-             </form>
-         </section>
-     {% else %}
-         <h3>Для добавления комментария необходимо <a href="{% url 'login' %}">авторизоваться</a>.</h3>
-     {% endif %}
+            {% if post.image %}
+            <img class="blogimg" src="{{ post.image.url }}" alt="Изображение статьи" />
+            {% endif %}
 
-     {% for comment in comments %}
-     
-         <section class="feedback-section">
-             <h7>{{ comment.date }}</h7>
-             <h4>{{ comment.author }}</h4>
-             <p>{{ comment.text|linebreaksbr }}</p>
-         </section>
-     {% endfor %}
- {% endblock %}
+            <div class="post-content">
+                {{ post.content|linebreaksbr }}
+            </div>
+
+            <div style="margin-top:18px;">
+                <a href="{% url 'blog_list' %}" class="btn btn-default">Назад к списку</a>
+            </div>
+
+            <hr style="border-color: rgba(255,255,255,0.04); margin:18px 0;">
+
+            <h3 style="color:var(--accent);margin-top:0;">Комментарии</h3>
+
+            {% for comment in comments %}
+            <div class="comment-item">
+                <div class="meta">
+                    <strong>{{ comment.author }}</strong> • <span class="date">{{ comment.date|date:"d.m.Y H:i" }}</span>
+                </div>
+                <div class="text">{{ comment.text|linebreaksbr }}</div>
+            </div>
+            {% empty %}
+            <p class="small-muted">Пока нет комментариев. Будьте первым!</p>
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+            <section class="feedback-section" style="margin-top:12px;">
+                <form method="post">
+                    {% csrf_token %}
+                    <h4 style="margin-top:0;color:var(--accent);">Добавить комментарий</h4>
+                    {{ form.as_p }}
+                    <button type="submit" class="submit-button">Отправить комментарий</button>
+                </form>
+            </section>
+            {% else %}
+            <p class="small-muted">Для добавления комментария необходимо <a href="{% url 'login' %}">авторизоваться</a>.</p>
+            {% endif %}
+        </div>
+
+        <aside class="sidebar">
+            <h4>О авторе</h4>
+            {% if post.author %}
+            <p class="small-muted">Профиль: {{ post.author.username }}</p>
+            {% else %}
+            <p class="small-muted">Автор не указан</p>
+            {% endif %}
+
+            <hr style="border-color: rgba(255,255,255,0.04); margin:12px 0;">
+
+            <h4>Быстрые ссылки</h4>
+            <p><a href="{% url 'catalog_list' %}">Каталог</a></p>
+            <p><a href="{% url 'contact' %}">Контакты</a></p>
+        </aside>
+    </div>
+</section>
+{% endblock %}

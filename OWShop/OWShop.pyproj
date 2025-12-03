@@ -83,16 +83,12 @@
     <Content Include="app\templates\app\cart.html" />
     <Content Include="app\templates\app\contact.html" />
     <Content Include="app\templates\app\category.html" />
-    <Content Include="app\templates\app\links.html" />
     <Content Include="app\templates\app\my_orders.html" />
     <Content Include="app\templates\app\newpost.html" />
-    <Content Include="app\templates\app\oldabout.html" />
     <Content Include="app\templates\app\orders_manager.html" />
     <Content Include="app\templates\app\order_detail.html" />
-    <Content Include="app\templates\app\pool.html" />
     <Content Include="app\templates\app\product_detail.html" />
     <Content Include="app\templates\app\registration.html" />
-    <Content Include="app\templates\app\videopost.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
@@ -117,7 +113,6 @@
     <Content Include="app\static\app\scripts\respond.js" />
     <Content Include="app\static\app\scripts\respond.min.js" />
     <Content Include="app\static\app\scripts\_references.js" />
-    <Content Include="app\templates\app\about.html" />
     <Content Include="app\templates\app\contact.html" />
     <Content Include="app\templates\app\index.html" />
     <Content Include="app\templates\app\layout.html" />

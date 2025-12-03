@@ -1,16 +1,21 @@
-{% if user.is_authenticated %}
-<form id="logoutForm" action="/logout/" method="post" class="navbar-right">
-    {% csrf_token %}
-    <ul class="nav navbar-nav navbar-right">
-        <li><span class="navbar-brand">Привет, {{ user.username }}!</span></li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
-    </ul>
-</form>
+{# app/templates/app/loginpartial.html #}
+{% load static user_tags %}
+{# Блок учёта пользователя в шапке — компактный, с безопасным обрезанием длинных имён #}
 
-{% else %}
-
-<ul class="nav navbar-nav navbar-right">
-    <li><a href="{% url 'login' %}">Войти</a></li>
-</ul>
-
-{% endif %}
+<div class="user-menu">
+    {% if user.is_authenticated %}
+    <div class="user-info">
+        <form id="logoutForm" action="{% url 'logout' %}" method="post" class="logout-form">
+            {% csrf_token %}
+            <div class="user-row">
+                <span class="nav-username" title="{{ user.username }}">{{ user.username }}</span>
+                <button type="submit" class="btn btn-default btn-logout">Выйти</button>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div class="anon-links">
+        <a class="btn btn-default" href="{% url 'login' %}?next={{ request.path }}">Войти</a>
+    </div>
+    {% endif %}
+</div>

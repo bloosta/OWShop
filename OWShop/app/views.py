@@ -35,9 +35,10 @@ def home(request):
 def contact(request):
     """Renders the contact page."""
     assert isinstance(request, HttpRequest)
-    address = 'г. Пример, ул. Примерная, 1'
+    address = 'г. Псков, ул. Льва Толстого, 4'
     phones = ['+7 (900) 000-00-00', '+7 (900) 000-00-01']
-    developer = 'Разработчик: Ваша Фамилия И.О.'
+    developer = 'Капустин А. А.'
+    support = 'OWShop@support.com'
     return render(
         request,
         'app/contact.html',
@@ -46,65 +47,10 @@ def contact(request):
             'address': address,
             'phones': phones,
             'developer': developer,
+            'support': support,
             'year': datetime.now().year,
         }
     )
-
-
-def about(request):
-    """Renders the about page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/about.html',
-        {
-            'title': 'О нас',
-            'message': 'Наша страница о нас',
-            'year': datetime.now().year,
-        }
-    )
-
-
-def links(request):
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/links.html',
-        {
-            'title': 'Ссылки',
-            'message': 'Полезные ссылки',
-            'year': datetime.now().year,
-        }
-    )
-
-
-def pool(request):
-    submitted = False
-    submitted_data = None
-    if request.method == 'POST':
-        form = PoolForm(request.POST)
-        if form.is_valid():
-            submitted = True
-            field_names = {
-                'rating_overall': 'Общая оценка сайта',
-                'rating_design': 'Оценка услуг',
-                'rating_content': 'Оценка техподдержки',
-                'features_liked': 'Приобретенный товар',
-                'features_improve': 'Что можно улучшить',
-                'newsletter': 'Подписка на рассылку',
-                'contact_method': 'Способ связи',
-            }
-            submitted_data = [f'{field_names.get(field, field)}: {value}' for field, value in form.cleaned_data.items()]
-            # корректировки отображения
-            for idx, i in enumerate(submitted_data):
-                if 'Подписка на рассылку' in i:
-                    submitted_data[idx] = 'Подписка на рассылку: Получать' if 'True' in i else 'Подписка на рассылку: Не получать'
-                if 'Способ связи' in i:
-                    submitted_data[idx] = 'Способ связи: Сообщить по телефону' if 'phone' in i else 'Способ связи: Сообщить на email'
-    else:
-        form = PoolForm()
-    return render(request, 'app/pool.html', {'form': form, 'title': 'Обратная связь', 'submitted': submitted, 'submitted_data': submitted_data})
-
 
 # ---------------- Blog related ----------------
 def blog_list(request):
@@ -226,10 +172,7 @@ def _save_cart(request, cart):
 @login_required(login_url='/login/')
 def add_to_cart(request, slug):
     if not is_client(request.user):
-        # если пользователь не авторизован — его уже перенаправит @login_required,
-        # поэтому сюда попадают аутентифицированные пользователи без роли Client (например, Manager).
         messages.error(request, "Добавлять в корзину могут только клиенты. Пожалуйста, зарегистрируйтесь или обратитесь к администратору, чтобы получить роль Клиента.")
-        # перенаправляем в каталог (или на главную) — не на страницу логина
         return redirect('catalog_list')
 
 
