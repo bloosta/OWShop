@@ -1,9 +1,9 @@
 ﻿{% extends 'app/layout.html' %}
-{% load static %}
+{% load static user_tags %}
 {% block title %}{{ product.title }}{% endblock %}
 
 {% block content %}
-<section class="product-detail">
+<section class="product-detail panel">
     <div class="left">
         {% if product.image %}
         <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-responsive">
@@ -30,21 +30,35 @@
 
         <p class="price">Цена: <span style="font-weight:900;">{{ product.price }} ₽</span></p>
 
-        <p class="stock">
+        <p class="stock" style="margin-bottom:10px;">
             {% if product.stock > 0 %}
             В наличии: {{ product.stock }}
             {% else %}
-            Нет в наличии
+            <strong style="color:#f66;">Нет в наличии</strong>
             {% endif %}
         </p>
 
-        <div class="buy-row">
-            <form method="post" action="{% url 'add_to_cart' product.slug %}">
+        <div class="buy-row" style="align-items:center;">
+            {# Если товар в наличии и пользователь — клиент или суперадмин, показываем рабочую форму #}
+            {% if product.stock > 0 %}
+            {% if user.is_authenticated %}
+            {% if user|has_group:"Client" or user.is_superuser %}
+            <form method="post" action="{% url 'add_to_cart' product.slug %}" style="margin:0;">
                 {% csrf_token %}
                 <button type="submit" class="submit-button">Добавить в корзину</button>
             </form>
+            {% else %}
+            <button class="btn-default" disabled title="Только клиенты могут добавлять в корзину">Только для клиентов</button>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-default">Войдите, чтобы купить</a>
+            {% endif %}
+            {% else %}
+            {# товар отсутствует — дизейблим кнопку #}
+            <button class="btn-default out-of-stock" disabled>Нет в наличии</button>
+            {% endif %}
 
-            <a href="{% url 'catalog_list' %}" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600;">
+            <a href="{% url 'catalog_list' %}" class="btn" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600;margin-left:12px;">
                 Вернуться в каталог
             </a>
         </div>

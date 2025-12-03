@@ -14,9 +14,7 @@
 </head>
 
 <body>
-    <header>
-
-    </header>
+    <header></header>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -31,12 +29,14 @@
                     <img class="logo" src="{% static 'app/content/logo.png' %}" alt="logo" />
                 </a>
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'home' %}">Главная</a></li>
                     <li><a href="{% url 'contact' %}">Контакты</a></li>
                     <li><a href="{% url 'catalog_list' %}">Каталог</a></li>
                     <li><a href="{% url 'blog_list' %}">Новости</a></li>
+
                     {% if user.is_authenticated %}
                     {% if user|has_group:"Client" or user.is_superuser %}
                     <li><a href="{% url 'cart_view' %}">Корзина</a></li>
@@ -51,6 +51,11 @@
                     {% else %}
                     <li><a href="{% url 'registration' %}">Регистрация</a></li>
                     {% endif %}
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <li>
+                        <a href="{% url 'admin:index' %}" class="btn-admin">Админ панель</a>
+                    </li>
+                    {% endif %}
                 </ul>
 
                 {% include 'app/loginpartial.html' %}
@@ -59,6 +64,25 @@
     </div>
 
     <div class="container body-content">
+
+        {# Сообщения (Django messages) — отображаем сверху страницы #}
+        {% if messages %}
+        <div class="messages-container" aria-live="polite" aria-atomic="true">
+            {% for message in messages %}
+            {% if message.tags %}
+            {% comment %} message.tags может содержать 'error', 'success', 'info' и т.д. {% endcomment %}
+            {% endif %}
+            <div class="alert {% if 'error' in message.tags %}alert-danger{% elif 'warning' in message.tags %}alert-warning{% elif 'success' in message.tags %}alert-success{% else %}alert-info{% endif %}">
+                <span class="alert-title">
+                    {% if 'success' in message.tags %}Успех{% elif 'error' in message.tags %}Ошибка{% elif 'warning' in message.tags %}Внимание{% else %}Инфо{% endif %}:
+                </span>
+                <span class="alert-message">{{ message }}</span>
+                <button type="button" class="alert-close" aria-label="Закрыть" onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         {% block content %}{% endblock %}
         <hr />
 
@@ -71,6 +95,27 @@
     <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
     <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
     <script src="{% static 'app/scripts/respond.js' %}"></script>
+
+    {# Небольшой скрипт для авто-скрытия уведомлений через 6 секунд (можно убрать) #}
+    <script>
+        (function () {
+            try {
+                const alerts = document.querySelectorAll('.messages-container .alert');
+                if (alerts.length) {
+                    setTimeout(() => {
+                        alerts.forEach(a => {
+                            if (a) {
+                                a.style.transition = 'opacity 0.4s ease';
+                                a.style.opacity = '0';
+                                setTimeout(() => a.style.display = 'none', 420);
+                            }
+                        });
+                    }, 6000);
+                }
+            } catch (e) { }
+        })();
+    </script>
+
     {% block scripts %}{% endblock %}
 </body>
 </html>

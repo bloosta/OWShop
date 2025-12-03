@@ -831,3 +831,32 @@ select {
 .post-content p {
     margin: 0 0 12px 0;
 }
+
+.btn-default[disabled],
+.btn-default:disabled,
+button.btn-default[disabled],
+button.btn-default:disabled,
+.btn-default.disabled {
+    background: rgba(255,255,255,0.04) !important; 
+    color: #ffffff !important; 
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    cursor: not-allowed !important;
+    opacity: 1 !important; 
+    box-shadow: none !important;
+    pointer-events: none !important;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    transition: none !important;
+}
+
+    .btn-default[disabled].out-of-stock {
+        background: rgba(249, 158, 26, 0.06) !important;
+        color: #ffdddd !important;
+        border-color: rgba(249, 158, 26, 0.12) !important;
+    }
+
+a.btn-default[disabled] {
+    pointer-events: none;
+}
+
